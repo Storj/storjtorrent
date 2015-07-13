@@ -273,7 +273,7 @@ class Session(object):
         if self.alive:
             for handle in self.handles:
                 if handle.has_metadata():
-                    name = handle.get_torrent_info().name()[:40]
+                    name = handle.get_torrent_info().name()
                 else:
                     name = ''.join(
                         ['torrent-', str(uuid.uuid4().fields[-1])[:5]])
