@@ -272,13 +272,15 @@ class Session(object):
 
         if self.alive:
             for handle in self.handles:
+                status = handle.status()
                 if handle.has_metadata():
                     name = handle.get_torrent_info().name()[:40]
                 else:
+                    # Prevents overloading status dictionary
                     name = ''.join(
-                        ['torrent-', str(uuid.uuid4().fields[-1])[:5]])
+                        ['torrent-', str(status.info_hash())])
 
-                status = handle.status()
+                
 
                 self._status['torrents'][name] = {
                     'state_str': state_str[status.state],
